@@ -80,7 +80,7 @@ describe('Part3Ex3Test', () => {
     And here's how you'd do all of this with an agar API.
      */
     const contentBody = TinyDom.body(editor);
-    const text = Cursors.follow(contentBody, [ 1, 1, 0 ]).getOrDie();
+    const text = Cursors.follow(contentBody, [1, 1, 0]).getOrDie();
     // Note that Cursors.follow only deals with DOM nodes, not offsets, and it uses the same node
     // for both the selection start and end node
     /*
@@ -93,7 +93,7 @@ describe('Part3Ex3Test', () => {
 
     https://github.com/tinymce/tinymce/blob/develop/modules/mcagar/docs/bdd.md#tinyselections
      */
-    TinySelections.setSelection(editor, [ 1, 1, 0 ], 0, [ 1, 1, 0 ], 'bolded'.length);
+    TinySelections.setSelection(editor, [1, 1, 0], 0, [1, 1, 0], 'bolded'.length);
 
     assert.equal(editor.selection.getContent(), 'bolded');
   });
@@ -102,8 +102,10 @@ describe('Part3Ex3Test', () => {
     const editor = hook.editor();
 
     // TODO: move the selection to around the words "a bit of"
+    TinySelections.setSelection(editor, [0, 0], "Here is ".length, [0, 0], 8 + "a bit of".length);
 
     // TODO: use an editor command to underline that content (https://www.tiny.cloud/docs/advanced/editor-command-identifiers/)
+    editor.execCommand('underline');
 
     TinyAssertions.assertContent(editor, [
       '<p>Here is <span style="text-decoration: underline;">a bit of</span> content</p>',
@@ -112,5 +114,6 @@ describe('Part3Ex3Test', () => {
     ].join('\n'));
 
     // TODO: Write an assertion to test your changes (hint: TinyAssertions)
+    assert.equal(editor.selection.getContent(), '<span style="text-decoration: underline;">a bit of</span>');
   });
 });
