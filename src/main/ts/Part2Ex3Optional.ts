@@ -43,10 +43,7 @@ export const nonEmptyString = (s: string): Optional<string> =>
 // You can use a regex.
 // Have a look at Exercise3OptionTest.ts for example input. Make sure the tests pass.
 export const getProtocol = (url: string): Optional<string> => {
-  return Optional.from(url.match(/^(http(s)?):\/\/?/)).fold(
-    () => Optional.none(),
-    (x) => Optional.some(x[1])
-  )
+  return Optionals.mapFrom(url.match(/^(http(s)?):\/\/?/), (x) => x[1]);
 };
 
 /*
