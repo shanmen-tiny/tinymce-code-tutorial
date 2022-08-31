@@ -1,4 +1,4 @@
-import { Optional } from '@ephox/katamari';
+import { Optional, Optionals } from '@ephox/katamari';
 
 /*
 Optional
@@ -36,18 +36,17 @@ export const toPositiveInteger = (n: number): Optional<number> =>
 
 // TODO: create a function which takes a string and returns some if the string is non-empty
 export const nonEmptyString = (s: string): Optional<string> =>
-  s.length > 0 ? Optional.some(s) : Optional.none();
+  Optionals.someIf(s.length > 0, s);
 
 // TODO: create a function which takes a url as a string and returns the protocol part as an Optional.
 // The string may or may not actually have a protocol. For the protocol to be valid, it needs to be all alpha characters.
 // You can use a regex.
 // Have a look at Exercise3OptionTest.ts for example input. Make sure the tests pass.
 export const getProtocol = (url: string): Optional<string> => {
-  let result = null;
-  if (url) {
-    result = url.match(/^(http(s)?):\/\/?/);
-  }
-  return result ? Optional.some(result[1]) : Optional.none();
+  return Optional.from(url.match(/^(http(s)?):\/\/?/)).fold(
+    () => Optional.none(),
+    (x) => Optional.some(x[1])
+  )
 };
 
 /*
@@ -150,7 +149,7 @@ export const convertOptionalToArray = <A>(e: Optional<A>): A[] => {
 
 // TODO: Write a function that converts an A[] to an Optional<A>. If the array has more than one element, only consider the first element.
 export const convertArrayToOptional = <A>(e: A[]): Optional<A> => {
-  return e.length > 0 ? Optional.from(e[0]) : Optional.none();
+  return Optionals.someIf(e.length > 0, e[0]);
 };
 
 /*

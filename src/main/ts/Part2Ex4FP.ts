@@ -103,9 +103,7 @@ const nextMode2 = (m: Mode): Mode => {
   }
 }
 
-const switchMode2 = (m: Mode): void => {
-  switchMode(nextMode2(m));
-}
+const switchMode2: (m: Mode) => void = Fun.compose1(switchMode, nextMode2)
 
 /*
 The identity function.

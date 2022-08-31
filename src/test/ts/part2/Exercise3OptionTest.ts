@@ -12,6 +12,7 @@ describe('Exercise3OptionTest', () => {
     assert.isTrue(Ex.getProtocol('3ttp://frog.com').isNone(), 'malformed protocol should not be registered');
     assert.isTrue(Ex.getProtocol('httpsfrog.com').isNone(), 'no protocol should be found');
     assert.isTrue(Ex.getProtocol('httpfrog.com').isNone(), 'no protocol should be found');
+    assert.isTrue(Ex.getProtocol('').isNone(), 'no protocol should be found');
   });
 
   it("toPositiveInteger", () => {
@@ -22,7 +23,7 @@ describe('Exercise3OptionTest', () => {
 
   it("nonEmptyString", () => {
     assert.equal(Ex.nonEmptyString("hello").getOrDie(), "hello");
-    assert.isTrue(Ex.nonEmptyString("").isNone());
+    assert.isTrue(Ex.nonEmptyString("").isNone(), "Non empty string");
   });
 
   it("double an optional number", () => {
@@ -55,6 +56,8 @@ describe('Exercise3OptionTest', () => {
     assert.deepEqual(Ex.convertArrayToOptional([99, 1, 3]).getOrDie(), 99, "multiple elements in the array");
     assert.deepEqual(Ex.convertArrayToOptional([98]).getOrDie(), 98, "one element array");
     assert.isTrue(Ex.convertArrayToOptional([]).isNone(), "empty array");
+    assert.deepEqual(Ex.convertArrayToOptional([undefined, undefined, undefined]).getOrDie(), undefined, "Array with 'undefined'");
+    assert.deepEqual(Ex.convertArrayToOptional([null, null, null]).getOrDie(), null, "Array with 'null'");
   });
 
   it("add 3", () => {

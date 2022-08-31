@@ -61,6 +61,9 @@ describe('Exercise1CodeStyleTests', () => {
 
     const b2: Boundz = ({ x1: 9, y1: 9, x2: 99, y2: 99 });
     assert.deepEqual(CodeStyle.height(b2), 90, 'Height 2');
+
+    const b3: Boundz = ({ x1: 9, y1: 99, x2: 99, y2: 9 });
+    assert.deepEqual(CodeStyle.height(b3), -90, 'Height 3');
   });
 
   /*
