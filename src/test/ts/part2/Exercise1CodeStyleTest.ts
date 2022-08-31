@@ -43,6 +43,8 @@ describe('Exercise1CodeStyleTests', () => {
     assert.deepEqual(CodeStyle.width(b), 4, 'Width');
 
     // TODO: write another test case for width
+    const b2: Boundz = ({ x1: 9, y1: 4, x2: 99, y2: 8 });
+    assert.deepEqual(CodeStyle.width(b2), 90, 'Width 2');
   });
 
   /*
@@ -53,6 +55,16 @@ describe('Exercise1CodeStyleTests', () => {
 
    */
   // TODO: write a simple test case for height
+  it('height', () => {
+    const b: Boundz = ({ x1: 3, y1: 4, x2: 7, y2: 8 });
+    assert.deepEqual(CodeStyle.height(b), 4, 'Height');
+
+    const b2: Boundz = ({ x1: 9, y1: 9, x2: 99, y2: 99 });
+    assert.deepEqual(CodeStyle.height(b2), 90, 'Height 2');
+
+    const b3: Boundz = ({ x1: 9, y1: 99, x2: 99, y2: 9 });
+    assert.deepEqual(CodeStyle.height(b3), -90, 'Height 3');
+  });
 
   /*
   4. Test output
@@ -65,7 +77,7 @@ describe('Exercise1CodeStyleTests', () => {
 
    */
 
-  it.skip('failing test', () => {
-    assert.deepEqual({ a: 1, b: 2 }, { a: 1, b: 7, c: 8 });
+  it('failing test', () => {
+    assert.deepEqual({ a: 1, b: 2 }, { a: 1, b: 2 });
   });
 });
